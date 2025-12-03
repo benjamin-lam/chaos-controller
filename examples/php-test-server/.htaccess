@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^api/(.*)$ /public/api/$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /public/$1.php [L,QSA]
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"

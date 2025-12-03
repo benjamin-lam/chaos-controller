@@ -1,0 +1,17 @@
+{
+    "name": "playwright-test-server",
+    "description": "PHP Test Server for Playwright E2E Testing",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PlaywrightTestServer\\": "utils/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 router.php",
+        "test": "php tests/test-endpoints.php"
+    }
+}
