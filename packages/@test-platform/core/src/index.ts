@@ -5,6 +5,7 @@ export * from './test-utils';
 export * from './retry-helpers';
 export * from './screenshot-utils';
 export * from './config-presets';
+export * from './playwright-config-builder';
 export * from './env-validator';
 export * from './env-loader';
 export * from './device-matrix';

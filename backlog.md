@@ -1,4 +1,5 @@
 ## [Playwright] Gemeinsamen Config-Builder einführen
+STATUS: done – Neuer `buildTemplatePlaywrightConfig` Helper stellt gemeinsame Defaults (Use-Options, Projects, Reporter-Logik) bereit und alle Templates nutzen ihn.
 **Beschreibung:** Die nahezu identischen `playwright.config.ts` Dateien der Templates sollen über einen gemeinsamen Helper aus `@test-platform/core` erzeugt werden (Default-Use-Options, Projects, Reporter-Logik). Dabei werden wiederverwendbare Defaults (Viewport, Headless, Video, Traces) zentral gepflegt.
 **Nutzen:** Reduziert Duplication, stellt konsistente Standards über alle Templates sicher und verringert Fehler bei zukünftigen Anpassungen.
 **Aufwand:** Mittel
@@ -11,6 +12,7 @@
 **Risiko/Abhängigkeiten:** Erfordert Abgleich mit realen Apps, Anpassung der Beispieltests und global-setup Hooks.
 
 ## [DX] Einheitliche Environment-Dokumentation & Beispiele
+STATUS: done – Alle `.env.example.*` Dateien listen Laufzeit-Flags konsistent, `env-loader` validiert HEADLESS/TEST_SUITE/TEST_TAG und README beschreibt die Nutzung.
 **Beschreibung:** `.env.example.*` Dateien sollen alle aktuell genutzten Flags (z.B. HEADLESS, Video/Trace-Schalter, Stage-spezifische URLs) konsistent auflisten und kurz erläutern. Ergänzend sollte die README die Nutzung von `NODE_ENV`/`TEST_SUITE`/`TEST_TAG` dokumentieren.
 **Nutzen:** Schnellere lokale Einrichtung, weniger Validierungsfehler durch fehlende Variablen, klarere CI-Konfiguration.
 **Aufwand:** Klein

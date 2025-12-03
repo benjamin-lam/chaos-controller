@@ -27,3 +27,7 @@
 - Playwright-Setup: 7/10
 - Testqualität (Lesbarkeit & Wartbarkeit): 6/10
 - DX/Struktur (Ordner, Config, Wiederverwendbarkeit): 6/10
+
+## Umgesetzte Tickets (Session)
+- [Playwright] Gemeinsamen Config-Builder einführen – zentraler Builder in `@test-platform/core` eingeführt und alle Templates darauf umgestellt.
+- [DX] Einheitliche Environment-Dokumentation & Beispiele – `.env.example.*` Dateien um Laufzeit-Flags ergänzt, Validierung erweitert und README dokumentiert.
