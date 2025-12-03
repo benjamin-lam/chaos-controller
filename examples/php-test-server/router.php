@@ -30,5 +30,11 @@ if (is_file($file)) {
     return true;
 }
 
-// Default to index.php for unknown routes.
-require $publicDir . '/index.php';
+// Default to index.php for root path, otherwise 404.
+if ($page === '/index') {
+    require $publicDir . '/index.php';
+    return true;
+}
+
+http_response_code(404);
+require $publicDir . '/errors/404.php';

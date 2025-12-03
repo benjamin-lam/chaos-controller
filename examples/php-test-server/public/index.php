@@ -9,6 +9,21 @@ $delay = isset($_GET['delay']) ? intval($_GET['delay']) : 0;
 $errorMode = $_GET['error'] ?? null;
 $language = $_GET['lang'] ?? 'de';
 $theme = $_GET['mode'] ?? 'light';
+$searchQuery = trim($_GET['q'] ?? '');
+
+$searchItems = [
+    ['title' => 'Pizza Margherita'],
+    ['title' => 'Veggie Burger'],
+    ['title' => 'Salat'],
+    ['title' => 'Pasta Carbonara'],
+];
+
+$searchResults = [];
+if ($searchQuery !== '') {
+    $searchResults = array_values(array_filter($searchItems, function ($item) use ($searchQuery) {
+        return stripos($item['title'], $searchQuery) !== false;
+    }));
+}
 
 $responseBuilder->simulateDelay($delay);
 
@@ -45,6 +60,16 @@ $_SESSION['visits']++;
         body { background: var(--primary-color); color: var(--text-color); font-family: sans-serif; }
         .test-element { border: 2px dashed #4CAF50; padding: 20px; margin: 10px; }
         [data-testid] { background-color: #f0f8ff; }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.open { display: flex; }
+        .modal__dialog { background: #fff; color: #000; padding: 20px; min-width: 280px; border-radius: 8px; }
     </style>
 </head>
 <body>
@@ -69,6 +94,35 @@ $_SESSION['visits']++;
             <h2>Dynamic Content Area</h2>
             <button onclick="loadContent()" data-testid="load-content-btn">Load Content</button>
             <div id="ajax-content" data-testid="ajax-response-area"></div>
+        </div>
+        <div class="test-element" data-testid="search-area">
+            <h2>Suche</h2>
+            <form method="GET" action="/" aria-label="Schnellsuche">
+                <input id="search" name="q" value="<?php echo htmlspecialchars($searchQuery); ?>" aria-label="Suchfeld">
+                <button type="submit">Suchen</button>
+            </form>
+            <ul class="search-results" data-testid="search-results">
+                <?php if ($searchQuery === ''): ?>
+                    <li data-testid="search-placeholder">Bitte Suchbegriff eingeben.</li>
+                <?php elseif (empty($searchResults)): ?>
+                    <li data-testid="search-empty">Keine Treffer gefunden.</li>
+                <?php else: ?>
+                    <?php foreach ($searchResults as $result): ?>
+                        <li><?php echo htmlspecialchars($result['title']); ?></li>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <div class="test-element" data-testid="modal-area">
+            <h2>Modal Test</h2>
+            <button id="open-modal" data-testid="open-modal">Modal öffnen</button>
+            <div class="modal" id="demo-modal" role="dialog" aria-modal="true">
+                <div class="modal__dialog">
+                    <h3>Modal Inhalt</h3>
+                    <p>Dies ist ein Beispiel-Modal.</p>
+                    <button class="modal-close" data-testid="modal-close">Schließen</button>
+                </div>
+            </div>
         </div>
         <div class="test-element">
             <h2>Test Data Table</h2>
@@ -129,6 +183,26 @@ $_SESSION['visits']++;
         const event = new CustomEvent('contentUpdated', { detail: { time: new Date().toISOString() } });
         document.dispatchEvent(event);
     }
+    (function setupModal() {
+        const openButton = document.getElementById('open-modal');
+        const modal = document.getElementById('demo-modal');
+        const closeButton = modal?.querySelector('.modal-close');
+
+        if (!openButton || !modal || !closeButton) return;
+
+        const closeModal = () => modal.classList.remove('open');
+
+        openButton.addEventListener('click', () => {
+            modal.classList.add('open');
+        });
+
+        closeButton.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    })();
     document.addEventListener('contentUpdated', (e) => console.log('Content updated at:', e.detail.time));
     </script>
 </body>
