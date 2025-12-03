@@ -10,9 +10,16 @@ test.describe('Artikel Veröffentlichung', () => {
     // ⚠️ URL und Selektoren anpassen
     await page.goto('/articles/new');
 
-    await page.fill('input[name="title"]', 'Playwright Platform Beispiel');
-    await page.fill('textarea[name="body"]', 'Dies ist ein Beispielartikel.');
-    await page.click('button[type="submit"]');
+    const titleField = page.locator('input[name="title"]');
+    const bodyField = page.locator('textarea[name="body"]');
+    const submitButton = page.locator('button[type="submit"]');
+
+    await expect(titleField).toBeVisible();
+    await expect(bodyField).toBeVisible();
+
+    await titleField.fill('Playwright Platform Beispiel');
+    await bodyField.fill('Dies ist ein Beispielartikel.');
+    await submitButton.click();
 
     await TestUtils.waitForNetworkIdle(page);
     await expect(page.locator('.article-status', { hasText: 'veröffentlicht' })).toBeVisible();
