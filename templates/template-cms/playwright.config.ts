@@ -4,6 +4,9 @@ import { ciReporters, localReporters } from '@test-platform/reporting';
 import { env } from './config/env';
 
 const suite = process.env.TEST_SUITE ?? 'regression';
+const headless = process.env.HEADLESS !== 'false';
+const videoMode = process.env.CI ? 'retain-on-failure' : 'off';
+const viewport = { width: 1280, height: 720 };
 const projects = (() => {
   if (suite === 'smoke') return [TestMatrix.smoke];
   if (suite === 'a11y') return [TestMatrix.a11y];
@@ -39,7 +42,10 @@ export default defineConfig({
     screenshot: env.ENABLE_SCREENSHOTS ? 'only-on-failure' : 'off',
     storageState: env.EDITOR_STORAGE_STATE,
     actionTimeout: env.ACTION_TIMEOUT,
-    navigationTimeout: env.NAVIGATION_TIMEOUT
+    navigationTimeout: env.NAVIGATION_TIMEOUT,
+    viewport,
+    headless,
+    video: videoMode
   },
   projects,
   grep: process.env.TEST_TAG ? new RegExp(process.env.TEST_TAG) : undefined,

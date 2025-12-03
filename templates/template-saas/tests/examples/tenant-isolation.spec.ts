@@ -5,9 +5,16 @@ test.describe('Mandanten-Isolation', () => {
   test('Nutzer sieht nur Daten seines Mandanten', async ({ page }) => {
     // ⚠️ BITTE ANPASSEN: Login-Fluss für eure SaaS
     await page.goto('/login');
-    await page.fill('[name="email"]', process.env.SAAS_EMAIL || 'tenant@test.de');
-    await page.fill('[name="password"]', process.env.SAAS_PASS || 'geheim');
-    await page.click('button[type="submit"]');
+    const emailInput = page.locator('[name="email"]');
+    const passwordInput = page.locator('[name="password"]');
+    const submitButton = page.locator('button[type="submit"]');
+
+    await expect(emailInput).toBeVisible();
+    await expect(passwordInput).toBeVisible();
+
+    await emailInput.fill(process.env.SAAS_EMAIL || 'tenant@test.de');
+    await passwordInput.fill(process.env.SAAS_PASS || 'geheim');
+    await submitButton.click();
 
     await TestUtils.waitForNetworkIdle(page);
     await page.goto('/tenant/dashboard');
