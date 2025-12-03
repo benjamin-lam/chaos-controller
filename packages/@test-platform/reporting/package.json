@@ -1,0 +1,20 @@
+{
+  "name": "@test-platform/reporting",
+  "version": "1.0.0",
+  "description": "Reporter-Integrationen (HTML, JUnit) für die Playwright Test Platform.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "license": "MIT"
+}
