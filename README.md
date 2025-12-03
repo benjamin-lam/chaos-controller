@@ -53,6 +53,13 @@ Die Beispiele unter `/examples/` sind als Kopiervorlagen gedacht:
 2. `.env` Datei - Environment Variables setzen
 3. `tests/` Ordner - Eigene Tests schreiben
 
+## 🌱 Environment & Laufzeit-Flags
+
+- Stage-spezifische Konfiguration: Lege `.env.<stage>` Dateien auf Basis der entsprechenden `.env.example.<stage>` an; der `env-loader` validiert Pflichtfelder pro Stage.
+- `HEADLESS` steuert, ob Playwright im sichtbaren Modus läuft (`false` zum Debuggen).
+- `TEST_SUITE` bestimmt die Project-Matrix (`smoke`, `regression`, `a11y`), `TEST_TAG` kann Tests per RegExp filtern.
+- `ENABLE_SCREENSHOTS` und `ENABLE_TRACES` aktivieren zusätzliche Artefakte; die Config setzt sie automatisch auf sinnvolle Defaults für Fehlersuche.
+
 ### Shared Packages nutzen:
 ```typescript
 import { TestUtils } from '@test-platform/core';
