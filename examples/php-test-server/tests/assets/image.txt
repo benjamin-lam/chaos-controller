@@ -1,0 +1,2 @@
+Placeholder text file representing an image upload.
+Use this file in Playwright upload success tests when binary assets are not supported.

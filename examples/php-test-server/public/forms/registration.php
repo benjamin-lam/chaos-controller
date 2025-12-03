@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Username <input type="text" name="username" data-testid="registration-username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"></label>
         <?php if (isset($errors['username'])): ?><span data-testid="registration-username-error"><?php echo $errors['username']; ?></span><?php endif; ?>
         <br>
-        <label>Email <input type="email" name="email" data-testid="registration-email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"></label>
+        <label>Email <input id="registration-email" type="email" name="email" data-testid="registration-email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"></label>
         <?php if (isset($errors['email'])): ?><span data-testid="registration-email-error"><?php echo $errors['email']; ?></span><?php endif; ?>
         <br>
         <label>Password <input type="password" name="password" data-testid="registration-password"></label>
