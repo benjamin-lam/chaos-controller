@@ -83,3 +83,7 @@ mein-projekt/
 3. **Page Objects**: Pro Seite eine Klasse
 4. **Tests isolieren**: Jeder Test unabhängig
 5. **Reporting**: Traces für Debugging aktivieren
+
+## 🤖 Auto-Pilot Prompt
+
+Nutze die Vorlage unter [`docs/playwright-auto-pilot.md`](docs/playwright-auto-pilot.md), um automatisierte Playwright Code-Reviews mit klaren Auto-Fixes, Vorschlägen und Human-in-the-Loop Hinweisen auszulösen.
