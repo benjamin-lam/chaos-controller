@@ -1,0 +1,26 @@
+{
+  "name": "@test-platform/quality-gates",
+  "version": "1.0.0",
+  "description": "Qualitäts-Gates, Netz-Fixtures und CI-Helfer für Playwright Projekte.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "test:stability": "playwright test --grep @stability --repeat-each=3",
+    "test:flaky": "playwright test --grep @flaky --retries=5"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "license": "MIT"
+}
